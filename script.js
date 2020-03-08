@@ -25,3 +25,16 @@ var questions = [
     answer: "var myJSON = JSON.stringify(myObj);"
 },
 ]
+var outline = questions.length;
+var questNum = 0;
+var timer = document.getElementById("timer");
+var submitBtn = document.getElementById("submitBtn")
+var score = 0;
+var interval;
+var highScores =new Array();
+var options;
+var question = "";
+var answer = "";
+var choiceNum = questions[questNum]['options'].length
+
+question += '<p>'
