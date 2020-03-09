@@ -15,7 +15,7 @@ var questions = [
         answer: "False"
     },
     {
-        question: "Which is an example of a variables?",
+        question: "Which is an example of an assigned variable?",
         options: ["var price1 = 5;", "var x = 5;", "var pi = 3.14;", "All of the above"],
         answer: "All of the above"
     },
@@ -31,21 +31,21 @@ var timer = document.getElementById("timer");
 var submitBtn = document.getElementById("btn_submit_initials")
 var score = 0;
 var interval;
-var highScores = new Array();
+var highScores =new Array();
 
-function displayQuestionAndAnswer(questNum) {
+function displayQuestionAndAnswer(questNum){
     var options;
     var question = "";
     var answer = "";
     var choiceNum = questions[questNum]['options'].length;
 
-    question += '<p>' +questions[questNum]['question'] +'</p>';
+    question += '<p>' +questions[questNum]['question']+'</p>';
 
     options = "<ul>";
-    for (i = 0; i < choiceNum; i++) {
+        for (i = 0; i < choiceNum; i++) {
         var selected = questions[questNum]['options'][i];
-        options += '<li class="options" onclick="grade(\'' + selected + '\')">' + selected + '</li>';
-    }
+        options += '<li class="options" onclick="grade(\'' +selected+ '\')">' +selected+ '</li>';
+        }
     options += "</ul>";
 
     answer += question + options;
@@ -53,66 +53,68 @@ function displayQuestionAndAnswer(questNum) {
     document.getElementById("intro").innerHTML = answer;
 }
 
-function stopTimer() {
+function stopTimer(){
     clearInterval(interval);
 }
 
-function scorePoint() {
+function scorePoint(){
     score = score + 20;
 }
 
-function grade(answer) {
-    if (answer === questions[questNum]['answer']) {
+function grade(answer){
+    if (answer === questions[questNum]['answer']){
+       
         scorePoint();
         questNum++;
-        if (outline > questNum) {
-            displayQuestionAndAnswer(questNum);
+        if (outline > questNum){
+        displayQuestionAndAnswer(questNum);
         }
         else {
-            getInitials();
+        getInitials();
         }
     }
     else {
         questNum++;
-        seTime = setTime - 15;
-    if (outline > questNum) {
+        seTime = setTime - 25;
+    
+    if (outline > questNum){
         displayQuestionAndAnswer(questNum);
     }
     else {
-         getInitials();
-        }   
-
+    getInitials();
     }
+
+  } 
 
 }
 
-function highScores() {
+function highScores(){
     var initials = document.getElementById("initials").value;
     localStorage.setItem("initials", initials);
-    playerInitialsAndScore = localStorage.getItem('initials')+' - '+ score;
+    playerInitialsAndScore = localStorage.getItem('initials') + ' - ' + score;
     highScores.push(playerInitialsAndScore);
     document.getElementById("score").innerText = highScores.toString();
 }
 
-function getInitials() {
+function getInitials(){
     stopTimer();
     gatherInitials =
-    "<input type='text' id='initials' value='' placeholder='Enter Your Initials Here'><button id='btn_submit_initials'>Submit</button>";
-    document.getElementById("intro").innerHTML = gatherInitials;
+    "<input type='text' id='initials' value='' placeholder='Enter Your Initials Here'><button id='btn_submit_initials'>Submit</button>";    document.getElementById("intro").innerHTML = gatherInitials;
     document.getElementById("btn_submit_initials").addEventListener("click", highScores);
 }
-function startTimer() {
+
+function startTimer(){
     document.getElementById("start").style.display = "none";
     displayQuestionAndAnswer(questNum);
-    
+
     setTime = 60;
     interval = setInterval(function() {
         setTime = setTime - 1;
         timer.textContent = setTime;
-        if(setTime <= 0)
+        if (setTime <= 0) 
         {
-            getInitials();       
-         }
+            getInitials();
+        }
     }, 1000);
 }
 
